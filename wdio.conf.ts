@@ -22,6 +22,12 @@ export const config: WebdriverIO.Config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
+
+  suites: {
+    ui: ["./test/specs/ui/**/*.ts"],
+    api: ["./test/specs/api/**/*.ts"],
+  },
+
   specs: ["./test/specs/**/*.ts"],
   // Patterns to exclude.
   exclude: [
@@ -50,16 +56,13 @@ export const config: WebdriverIO.Config = {
   // https://saucelabs.com/platform/platform-configurator
   //
   capabilities: [
-    {
-      browserName: "chrome",
-    },
+    // {
+    //   browserName: "chrome",
+    // },
     {
       browserName: "firefox",
       "moz:firefoxOptions": {
-        args: [
-          //'--headless',
-          "--disable-gpu",
-        ],
+        args: ["--headless", "--disable-gpu"],
       },
       acceptInsecureCerts: true,
     },

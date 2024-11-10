@@ -6,21 +6,28 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npx wdio run wdio.conf.js",
-    "wdio": "wdio run ./wdio.conf.ts"
+    "test": "wdio run ./wdio.conf.ts",
+    "test:ui": "wdio run ./wdio.conf.ts --suite ui",
+    "test:api": "wdio run ./wdio.conf.ts --suite api"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/chai": "^5.0.1",
     "@wdio/allure-reporter": "^9.2.2",
     "@wdio/junit-reporter": "^9.2.2",
     "chai": "^5.1.2",
     "eslint": "^9.14.0",
     "mocha": "^10.8.2",
     "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.6.3",
     "wdio-image-comparison-service": "^5.0.3"
+  },
+  "dependencies": {
+    "axios": "^1.7.7"
   }
 }
