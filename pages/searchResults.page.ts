@@ -1,5 +1,5 @@
 import { verifyElementClickableAndClick } from "../utils/elementActions";
-import { CATEGORY_DISPLAY_NAME_MAP } from "../constants/categoryMapping";
+import { CATEGORY_DISPLAY_NAME_MAP } from "../constants/dropdownOptions";
 import BasePage from "../pages/base.page";
 import Logger from "../utils/logger";
 

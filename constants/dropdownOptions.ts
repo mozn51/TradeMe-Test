@@ -1,3 +1,4 @@
+//Category Options
 export const CATEGORY_OPTIONS = {
   PROPERTY: "Trade Me Property",
   MOTORS: "Trade Me Motors",
@@ -5,6 +6,16 @@ export const CATEGORY_OPTIONS = {
   // Add other options as needed
 };
 
+// Display Name Mapping for Categories (used for validation)
+export const CATEGORY_DISPLAY_NAME_MAP: { [key: string]: string[] } = {
+  "Trade Me Property": ["Property", "Properties"],
+  "Business, farming & industry": ["Business, farming & industry"],
+  "Trade Me Motors": ["Motors", "Motors for sale"],
+  "Trade Me Jobs": ["Jobs"],
+  // Add other categories and display names as needed
+};
+
+// Regions
 export const ALL_LOCATIONS_REGIONS_OPTIONS = {
   NEW_ZEALAND: "New Zealand",
   NORTH_ISLAND: "North Island",
