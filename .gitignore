@@ -17,6 +17,9 @@ allure-results/
 allure-report/
 junit-results/
 .wdio/
+wdio-*.log
+logs/
+
 
 # Environment variables
 .env
