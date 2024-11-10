@@ -5,7 +5,7 @@ export const CATEGORY_OPTIONS = {
   // Add other options as needed
 };
 
-export const ALL_LOCALTIONS_REGIONS_OPTIONS = {
+export const ALL_LOCATIONS_REGIONS_OPTIONS = {
   NEW_ZEALAND: "New Zealand",
   NORTH_ISLAND: "North Island",
   NORTHLAND: "Northland",
@@ -13,26 +13,32 @@ export const ALL_LOCALTIONS_REGIONS_OPTIONS = {
   // Add other regions as needed
 };
 
-export const ALL_LOCALTIONS_DISTRICTS: { [key: string]: string[] } = {
-  Northland: [
-    "All of Northland",
-    "Dargaville",
-    "Kaikohe",
-    "Kaitaia",
-    "Kawakawa",
-    "Kerikeri",
-    "Mangawhai",
-    "Maungaturoto",
-    "Paihia",
-    "Whnagarei",
-  ],
-  Wellington: [
-    "All of Wellington",
-    "Kapiti",
-    "Lower Hutt City",
-    "Porirua",
-    "Upper Hutt City",
-    "Wellington City",
-  ],
-  // Add other districts as needed
+// Constants for each district within regions
+export const NORTHLAND_DISTRICTS = {
+  ALL_OF_NORTHLAND: "All of Northland",
+  DARGAVILLE: "Dargaville",
+  KAIKOHE: "Kaikohe",
+  KAITAIA: "Kaitaia",
+  KAWAKAWA: "Kawakawa",
+  KERIKERI: "Kerikeri",
+  MANGAWHAI: "Mangawhai",
+  MAUNGATUROTO: "Maungaturoto",
+  PAIHIA: "Paihia",
+  WHANGAREI: "Whangarei",
+};
+
+export const WELLINGTON_DISTRICTS = {
+  ALL_OF_WELLINGTON: "All of Wellington",
+  KAPITI: "Kapiti",
+  LOWER_HUTT_CITY: "Lower Hutt City",
+  PORIRUA: "Porirua",
+  UPPER_HUTT_CITY: "Upper Hutt City",
+  WELLINGTON_CITY: "Wellington City",
+};
+
+// Grouping districts by region in ALL_LOCATIONS_DISTRICTS
+export const ALL_LOCATIONS_DISTRICTS = {
+  Northland: NORTHLAND_DISTRICTS,
+  Wellington: WELLINGTON_DISTRICTS,
+  // Add other regions as needed
 };

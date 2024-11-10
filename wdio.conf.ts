@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+import { urls } from "./constants/urls";
 export const config: WebdriverIO.Config = {
   //
   // ====================
@@ -5,6 +8,7 @@ export const config: WebdriverIO.Config = {
   // ====================
   // WebdriverIO supports running e2e tests as well as unit and component tests.
   runner: "local",
+  baseUrl: urls.BASE_URL,
   tsConfigPath: "./tsconfig.json",
 
   //
@@ -55,18 +59,31 @@ export const config: WebdriverIO.Config = {
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://saucelabs.com/platform/platform-configurator
   //
-  capabilities: [
-    // {
-    //   browserName: "chrome",
-    // },
-    {
-      browserName: "firefox",
-      "moz:firefoxOptions": {
-        args: ["--headless", "--disable-gpu"],
-      },
-      acceptInsecureCerts: true,
-    },
-  ],
+  capabilities: (() => {
+    const browser = process.env.BROWSER || "both";
+    const capabilities = [];
+
+    if (browser === "chrome" || browser === "both") {
+      capabilities.push({
+        browserName: "chrome",
+        "goog:chromeOptions": {
+          args: [/*"--headless",*/ "--disable-gpu", "--window-size=1920,1080"],
+        },
+      });
+    }
+
+    if (browser === "firefox" || browser === "both") {
+      capabilities.push({
+        browserName: "firefox",
+        "moz:firefoxOptions": {
+          args: ["-headless", "--disable-gpu"],
+        },
+        acceptInsecureCerts: true,
+      });
+    }
+
+    return capabilities;
+  })(),
 
   //
   // ===================
@@ -136,6 +153,13 @@ export const config: WebdriverIO.Config = {
   // before running any tests.
   framework: "mocha",
 
+  // Options to be passed to Mocha.
+  // See the full list at http://mochajs.org/
+  mochaOpts: {
+    ui: "bdd",
+    timeout: 60000,
+  },
+
   //
   // The number of times to retry the entire specfile when it fails as a whole
   // specFileRetries: 1,
@@ -164,20 +188,11 @@ export const config: WebdriverIO.Config = {
       {
         outputDir: "./reports/junit-results",
         outputFileFormat: function (options) {
-          // optional
           return `results-${options.cid}.xml`;
         },
       },
     ],
   ],
-
-  // Options to be passed to Mocha.
-  // See the full list at http://mochajs.org/
-  mochaOpts: {
-    ui: "bdd",
-    timeout: 60000,
-  },
-
   //
   // =====
   // Hooks

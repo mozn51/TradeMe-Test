@@ -35,6 +35,16 @@ class SearchResultsPage extends BasePage {
    */
   public async isSearchResultsLoaded(item: string): Promise<boolean> {
     try {
+      Logger.info("Waiting for search results to load...");
+      await browser.waitUntil(
+        async () => await this.searchResultCount.isDisplayed(),
+        {
+          timeout: 10000, // Timeout per label, adjust as needed
+          interval: 1000,
+          timeoutMsg: `Failed to load the search result page for ${item} within the allotted time.`,
+        }
+      );
+
       const resultText = await this.searchResultCount.getText();
       const expectedText = `results for '${item}'`;
 
@@ -331,7 +341,11 @@ class SearchResultsPage extends BasePage {
     }
   }
 
-  public async collectListingDetails(): Promise<void> {
+  public async collectListingDetails(): Promise<{
+    propertyAddressText: string;
+    propertyBedroomNumber: number;
+    propertyAgentNameText: string;
+  }> {
     try {
       if (await this.isDetailsPageLoaded()) {
         // Define selectors for the required details on the details page
@@ -347,12 +361,19 @@ class SearchResultsPage extends BasePage {
 
         // Collect and log the details
         const propertyAddressText = await propertyAddressElement.getText();
-        const propertyBedroomText = await propertyBedroomElement.getText();
+        const propertyBedroomNumber = parseInt(
+          await propertyBedroomElement.getText()
+        );
         const propertyAgentNameText = await propertyAgentNameElement.getText();
 
         Logger.info(`Address: ${propertyAddressText}`);
-        Logger.info(`Beds: ${propertyBedroomText}`);
+        Logger.info(`Beds: ${propertyBedroomNumber}`);
         Logger.info(`Agent's Name: ${propertyAgentNameText}`);
+        return {
+          propertyAddressText,
+          propertyBedroomNumber,
+          propertyAgentNameText,
+        };
       } else {
         Logger.error("Details page did not load. Skipping data collection.");
       }

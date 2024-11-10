@@ -31,9 +31,23 @@ class HomePage extends BasePage {
    * @param item - The item to search for.
    */
   public async searchItem(item: string): Promise<void> {
-    await this.searchInput.setValue(item);
-    await this.clickSearch();
-    Logger.info(`Searching for item: ${item}`);
+    try {
+      await browser.waitUntil(
+        async () =>
+          (await this.searchInput.isDisplayed()) &&
+          (await this.searchInput.isEnabled()),
+        {
+          timeout: 10000,
+          interval: 500,
+          timeoutMsg: `Search field not ready for input within the allotted time.`,
+        }
+      );
+      await this.searchInput.setValue(item);
+      await this.clickSearch();
+      Logger.info(`Searching for item: ${item}`);
+    } catch (error: any) {
+      Logger.error(`Error during search action: ${error.message}`);
+    }
   }
 
   /**
