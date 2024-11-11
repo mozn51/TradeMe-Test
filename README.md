@@ -117,6 +117,8 @@ These are especially useful for CI/CD integrations, where the reports can be par
 
 ## Writing Tests
 
+### UI Tests
+
 UI tests are located in `test/specs/ui/`.
 Each test file follows the Page Object Model, ensuring reusable and maintainable code.
 
@@ -127,7 +129,8 @@ Each test file follows the Page Object Model, ensuring reusable and maintainable
 
 API tests are in `test/specs/api/`. Each API test follows best practices for validating responses, structure, and data.
 
-- **Example**: `api-tests.spec.ts` calls the Trade Me API to fetch car brands and verifies the count based on the `EXPECTED_TOTAL_CAR_BRANDS` in `.env`.
+- **Standard Test**: `api-tests.spec.ts` calls the Trade Me API to fetch car brands and verifies the count based on the `EXPECTED_TOTAL_CAR_BRANDS` in `.env`.
+- **Error Handing Test**: `api-tests-errors.spec.ts` tests scenarios where the API may fail or return unexpected results.
 
 ## Best Practices
 
