@@ -2,41 +2,52 @@ enum LogLevel {
   INFO = "INFO",
   WARN = "WARN",
   ERROR = "ERROR",
+  DEBUG = "DEBUG",
 }
 
 class Logger {
   /**
    * Logs an informational message.
-   * @param message - The message to log.
    */
-  public static info(message: string): void {
-    Logger.log(LogLevel.INFO, message);
+  public static info(message: string, details?: Record<string, any>): void {
+    Logger.log(LogLevel.INFO, message, details);
   }
 
   /**
    * Logs a warning message.
-   * @param message - The message to log.
    */
-  public static warn(message: string): void {
-    Logger.log(LogLevel.WARN, message);
+  public static warn(message: string, details?: Record<string, any>): void {
+    Logger.log(LogLevel.WARN, message, details);
   }
 
   /**
    * Logs an error message.
-   * @param message - The message to log.
    */
-  public static error(message: string): void {
-    Logger.log(LogLevel.ERROR, message);
+  public static error(message: string, details?: Record<string, any>): void {
+    Logger.log(LogLevel.ERROR, message, details);
+  }
+
+  /**
+   * Logs a debug message.
+   */
+  public static debug(message: string, details?: Record<string, any>): void {
+    Logger.log(LogLevel.DEBUG, message, details);
   }
 
   /**
    * Centralized logging method that formats and outputs messages.
-   * @param level - The level of the log (e.g., INFO, WARN, ERROR).
-   * @param message - The message to log.
    */
-  private static log(level: LogLevel, message: string): void {
+  private static log(
+    level: LogLevel,
+    message: string,
+    details?: Record<string, any>
+  ): void {
     const timestamp = new Date().toISOString();
-    console.log(`[${timestamp}] [${level}] ${message}`);
+    let logMessage = `[${timestamp}] [${level}] ${message}`;
+    if (details) {
+      logMessage += ` | Details: ${JSON.stringify(details)}`;
+    }
+    console.log(logMessage);
   }
 }
 
