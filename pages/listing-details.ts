@@ -1,6 +1,6 @@
-import Logger from '../utils/logger';
+import { Logger } from '../utils/logger';
 
-export class CollectListingDetails {
+export class ListingDetails {
   /**
    * Collects details from the listing details page, including address, bedroom count, and agent's name.
    * Logs each detail collected.
@@ -70,4 +70,3 @@ export class CollectListingDetails {
     }
   }
 }
-export default new CollectListingDetails();

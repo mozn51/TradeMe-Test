@@ -1,15 +1,15 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
+import { urls } from './constants/urls';
 dotenv.config();
-import { urls } from "./constants/urls";
 export const config: WebdriverIO.Config = {
   //
   // ====================
   // Runner Configuration
   // ====================
   // WebdriverIO supports running e2e tests as well as unit and component tests.
-  runner: "local",
+  runner: 'local',
   baseUrl: urls.BASE_URL,
-  tsConfigPath: "./tsconfig.json",
+  tsConfigPath: './tsconfig.json',
 
   //
   // ==================
@@ -28,12 +28,12 @@ export const config: WebdriverIO.Config = {
   //
 
   suites: {
-    ui: ["./test/specs/ui/**/*.ts"],
-    api: ["./test/specs/api/api-tests.spec.ts"],
-    apiErrors: ["./test/specs/api/api-tests-errors.spec.ts"],
+    ui: ['./test/specs/ui/**/*.ts'],
+    api: ['./test/specs/api/api-tests.spec.ts'],
+    apiErrors: ['./test/specs/api/api-tests-errors.spec.ts'],
   },
 
-  specs: ["./test/specs/**/*.ts"],
+  specs: ['./test/specs/**/*.ts'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -61,23 +61,23 @@ export const config: WebdriverIO.Config = {
   // https://saucelabs.com/platform/platform-configurator
   //
   capabilities: (() => {
-    const browser = process.env.BROWSER || "both";
+    const browser = process.env.BROWSER || 'both';
     const capabilities = [];
 
-    if (browser === "chrome" || browser === "both") {
+    if (browser === 'chrome' || browser === 'both') {
       capabilities.push({
-        browserName: "chrome",
-        "goog:chromeOptions": {
-          args: [/*"--headless",*/ "--disable-gpu", "--window-size=1920,1080"],
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+          args: ['--headless', '--disable-gpu', '--window-size=1920,1080'],
         },
       });
     }
 
-    if (browser === "firefox" || browser === "both") {
+    if (browser === 'firefox' || browser === 'both') {
       capabilities.push({
-        browserName: "firefox",
-        "moz:firefoxOptions": {
-          args: ["-headless", "--disable-gpu"],
+        browserName: 'firefox',
+        'moz:firefoxOptions': {
+          args: ['-headless', '--disable-gpu'],
         },
         acceptInsecureCerts: true,
       });
@@ -93,7 +93,7 @@ export const config: WebdriverIO.Config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "info",
+  logLevel: 'info',
   //
   // Set specific log levels per logger
   // loggers:
@@ -110,14 +110,14 @@ export const config: WebdriverIO.Config = {
   // },
 
   logLevels: {
-    webdriver: "error", // Set WebDriver logs to 'error' unless specified
-    "@wdio/local-runner": "warn", // Warnings for local runner
-    "@wdio/sync": "error", // Errors for @wdio/sync
-    "@wdio/mocha-framework": "warn", // Warnings for mocha framework
+    webdriver: 'error', // Set WebDriver logs to 'error' unless specified
+    '@wdio/local-runner': 'warn', // Warnings for local runner
+    '@wdio/sync': 'error', // Errors for @wdio/sync
+    '@wdio/mocha-framework': 'warn', // Warnings for mocha framework
   },
 
   // Output directory for WebdriverIO logs
-  outputDir: "./logs",
+  outputDir: './logs',
 
   //
   // If you only want to run your tests until a specific amount of tests have failed use
@@ -152,12 +152,12 @@ export const config: WebdriverIO.Config = {
   //
   // Make sure you have the wdio adapter package for the specific framework installed
   // before running any tests.
-  framework: "mocha",
+  framework: 'mocha',
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
   mochaOpts: {
-    ui: "bdd",
+    ui: 'bdd',
     timeout: 60000,
   },
 
@@ -175,19 +175,19 @@ export const config: WebdriverIO.Config = {
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
-    "spec",
+    'spec',
     [
-      "allure",
+      'allure',
       {
-        outputDir: "allure-results",
+        outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
       },
     ],
     [
-      "junit",
+      'junit',
       {
-        outputDir: "./reports/junit-results",
+        outputDir: './reports/junit-results',
         outputFileFormat: function (options) {
           return `results-${options.cid}.xml`;
         },

@@ -1,10 +1,11 @@
 import { ChainablePromiseElement } from 'webdriverio';
 import { urls } from '../constants/urls';
-import Logger from '../utils/logger';
-import UIActions from '../utils/ui-actions';
+import { Logger } from '../utils/logger';
+import { UIActions } from '../utils/ui-actions';
 import BasePage from './base';
 
 export class HomePage extends BasePage {
+  uIActions = new UIActions();
   // Define the selector for a key element unique to the homepage.
   get searchInput(): ChainablePromiseElement {
     return $('tm-homepage-in-with-the-new-campaign-header input');
@@ -46,7 +47,11 @@ export class HomePage extends BasePage {
     try {
       Logger.info(`Initiating search for item: ${item}`);
 
-      await UIActions.setValueIfVisible(this.searchInput, item, 'Search Input');
+      await this.uIActions.setValueIfVisible(
+        this.searchInput,
+        item,
+        'Search Input'
+      );
 
       Logger.info(`Entered search term: ${item}`);
       await this.clickSearch();
@@ -64,8 +69,7 @@ export class HomePage extends BasePage {
    */
   public async clickSearch(): Promise<void> {
     Logger.info('Attempting to click the search button.');
-    await UIActions.clickIfClickable(this.searchButton, 'Search Button');
+    await this.uIActions.clickIfClickable(this.searchButton, 'Search Button');
     Logger.info('Search button clicked successfully.');
   }
 }
-export default new HomePage();

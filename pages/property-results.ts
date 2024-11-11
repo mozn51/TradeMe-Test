@@ -1,5 +1,5 @@
 import { CATEGORY_DISPLAY_NAME_MAP } from '../constants/dropdown-options';
-import Logger from '../utils/logger';
+import { Logger } from '../utils/logger';
 
 export class PropertyResultsPage {
   /**
@@ -105,4 +105,3 @@ export class PropertyResultsPage {
     }
   }
 }
-export default new PropertyResultsPage();

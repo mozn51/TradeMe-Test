@@ -1,5 +1,5 @@
 import { ChainablePromiseElement } from 'webdriverio';
-import Logger from '../utils/logger';
+import { Logger } from '../utils/logger';
 
 export default class BasePage {
   /**

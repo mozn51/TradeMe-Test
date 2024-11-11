@@ -1,8 +1,9 @@
 import { ChainablePromiseElement } from 'webdriverio';
-import Logger from '../utils/logger';
-import UIActions from '../utils/ui-actions';
+import { Logger } from '../utils/logger';
+import { UIActions } from '../utils/ui-actions';
 
 export class CategoryDropdown {
+  uIActions = new UIActions();
   get categoryDropdownButton(): ChainablePromiseElement {
     return $(
       '//button[contains(@class, "tm-drop-down-tag__dropdown-button") and contains(.,"Category")]'
@@ -21,7 +22,7 @@ export class CategoryDropdown {
         `Attempting to select category "${listedOptions}" from the dropdown.`
       );
 
-      await UIActions.clickIfClickable(
+      await this.uIActions.clickIfClickable(
         this.categoryDropdownButton,
         'Category Dropdown Button'
       );
@@ -39,7 +40,7 @@ export class CategoryDropdown {
 
       if (await optionElement.isDisplayed()) {
         Logger.info(`Option "${listedOptions}" is displayed in the dropdown.`);
-        await UIActions.clickIfClickable(
+        await this.uIActions.clickIfClickable(
           optionElement,
           `${listedOptions} Option`
         );
@@ -58,4 +59,3 @@ export class CategoryDropdown {
     }
   }
 }
-export default new CategoryDropdown();

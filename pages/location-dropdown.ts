@@ -1,7 +1,7 @@
-import Logger from '../utils/logger';
-import UIActions from '../utils/ui-actions';
-
+import { Logger } from '../utils/logger';
+import { UIActions } from '../utils/ui-actions';
 export class LocationDropdown {
+  uIActions = new UIActions();
   get allLocationsDropdownButton(): ChainablePromiseElement {
     return $(
       '//button[contains(@class, "tm-drop-down-tag__dropdown-button") and contains(.,"All Locations")]'
@@ -34,7 +34,7 @@ export class LocationDropdown {
         `Attempting to select location "${locationRegion}" from the dropdown.`
       );
 
-      await UIActions.clickIfClickable(
+      await this.uIActions.clickIfClickable(
         this.allLocationsDropdownButton,
         'All Location Dropdown Button'
       );
@@ -48,7 +48,7 @@ export class LocationDropdown {
       );
       Logger.info('Location dropdown successfully expanded.');
 
-      await UIActions.clickIfClickable(
+      await this.uIActions.clickIfClickable(
         this.locationRegionDropdownButton,
         'Location Region Dropdown Button'
       );
@@ -69,7 +69,7 @@ export class LocationDropdown {
             timeoutMsg: `District dropdown not enabled for region "${locationRegion}".`,
           }
         );
-        await UIActions.clickIfClickable(
+        await this.uIActions.clickIfClickable(
           this.locationDistrictDropdownButton,
           'District Dropdown Button'
         );
@@ -86,4 +86,3 @@ export class LocationDropdown {
     }
   }
 }
-export default new LocationDropdown();

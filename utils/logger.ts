@@ -5,7 +5,7 @@ enum LogLevel {
   DEBUG = 'DEBUG',
 }
 
-class Logger {
+export class Logger {
   /**
    * Logs an informational message.
    */
@@ -50,4 +50,3 @@ class Logger {
     console.log(logMessage);
   }
 }
-export default Logger;

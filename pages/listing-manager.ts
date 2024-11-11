@@ -1,7 +1,8 @@
-import Logger from '../utils/logger';
-import UIActions from '../utils/ui-actions';
+import { Logger } from '../utils/logger';
+import { UIActions } from '../utils/ui-actions';
 
 export class ListingManager {
+  uIActions = new UIActions();
   /**
    * Retrieves the number of listings shown on the results page.
    * Logs the count retrieved and any issues encountered.
@@ -49,7 +50,7 @@ export class ListingManager {
       const firstListing = $(
         '(//tg-col[contains(@class, "l-col l-col--has-flex-contents") and not(contains(@class, "ad-card"))])[1]'
       );
-      await UIActions.clickIfClickable(firstListing, 'First Listing');
+      await this.uIActions.clickIfClickable(firstListing, 'First Listing');
       Logger.info('Clicked on the first listing in the search results.');
     } catch (error: any) {
       Logger.error(`Error clicking on the first listing: ${error.message}`);
@@ -57,4 +58,3 @@ export class ListingManager {
     }
   }
 }
-export default new ListingManager();

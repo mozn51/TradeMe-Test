@@ -1,5 +1,5 @@
 import { ChainablePromiseElement } from 'webdriverio';
-import Logger from '../utils/logger';
+import { Logger } from '../utils/logger';
 import BasePage from './base';
 
 export class BaseSearchResultsPage extends BasePage {
@@ -45,4 +45,3 @@ export class BaseSearchResultsPage extends BasePage {
     }
   }
 }
-export default new BaseSearchResultsPage();

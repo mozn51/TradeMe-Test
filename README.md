@@ -50,7 +50,7 @@ All configuration settings for WebdriverIO are in `wdio.conf.ts`. Key configurat
 
 - **Test Framework**: Mocha
 - **Reporters**: Spec, Allure, JUnit
-- **Browser Capabilities**: Chrome, Firefox (adjust as necessary)
+- **Browser Capabilities**: Chrome, Firefox (You can choose one of both)
 - **Timeouts** and **Retries**: Configured for stable and resilient test execution
 
 ## Environment Variables
@@ -112,15 +112,15 @@ allure open allure-report
 
 ### JUnit Report
 
-JUnit XML reports are generated in `reports/junit-results`.  
+JUnit XML reports are generated in `reports/junit-results`.
 These are especially useful for CI/CD integrations, where the reports can be parsed to display in CI dashboards.
 
 ## Writing Tests
 
-UI tests are located in `test/specs/ui/`.  
+UI tests are located in `test/specs/ui/`.
 Each test file follows the Page Object Model, ensuring reusable and maintainable code.
 
-- **Example**: `homepage-search.spec.ts` navigates to the Trade Me sandbox site,  
+- **Example**: `homepage-search.spec.ts` navigates to the Trade Me sandbox site,
   performs a search for "house," selects a category and region, and verifies listings.
 
 ### API Tests
@@ -137,7 +137,7 @@ API tests are in `test/specs/api/`. Each API test follows best practices for val
 
 ## Additional Notes
 
-- **Test Consistency**: Tests may occasionally fail if dynamic data (e.g., listing count) changes on the sandbox site.  
+- **Test Consistency**: Tests may occasionally fail if dynamic data (e.g., listing count) changes on the sandbox site.
   Such failures are expected and acceptable.
 - **Environment Variables**: If sensitive data is required, use a `.env` file to store environment-specific variables (optional).
 

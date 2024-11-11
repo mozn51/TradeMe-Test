@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { urls } from '../constants/urls';
-import Logger from './logger';
+import { Logger } from './logger';
 import { CarCategoriesResponse } from './types';
 
 export class ApiHelper {
@@ -16,7 +16,7 @@ export class ApiHelper {
       const response = await axios.get(endpoint);
       Logger.info('GET request successful', { endpoint });
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       Logger.error('GET request failed', {
         endpoint,
         error: error.message,
@@ -39,7 +39,7 @@ export class ApiHelper {
         endpoint,
       });
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       Logger.error('API request for used car categories failed', {
         endpoint,
         error: error.message,
@@ -48,4 +48,3 @@ export class ApiHelper {
     }
   }
 }
-export default new ApiHelper();
