@@ -1,9 +1,9 @@
 import axios from "axios";
 import { urls } from "../constants/urls";
-import { CarCategoriesResponse } from "../utils/types";
+import { CarCategoriesResponse } from "./types";
 import Logger from "./logger";
 
-class ApiHelper {
+export class ApiHelper {
   /**
    * Makes a GET request to a specified endpoint.
    * @param endpoint - The URL to send the GET request to.

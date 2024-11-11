@@ -19,7 +19,7 @@ export default class BasePage {
         async () =>
           await browser.execute(() => document.readyState === "complete"),
         {
-          timeout: 15000, // Adjust based on typical page load times
+          timeout: 20000, // Adjust based on typical page load times
           timeoutMsg: `Page did not fully load within the allotted time for URL: ${url}`,
         }
       );

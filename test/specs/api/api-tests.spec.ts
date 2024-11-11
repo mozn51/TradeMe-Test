@@ -1,4 +1,4 @@
-import ApiHelper from "../../../utils/apiHelper";
+import ApiHelper from "../../../utils/api-helper";
 import { expect } from "chai";
 import { CarCategoriesResponse } from "../../../utils/types";
 

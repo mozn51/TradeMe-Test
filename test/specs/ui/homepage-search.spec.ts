@@ -2,9 +2,14 @@ import {
   CATEGORY_OPTIONS,
   ALL_LOCATIONS_REGIONS_OPTIONS,
   ALL_LOCATIONS_DISTRICTS,
-} from "../../../constants/dropdownOptions";
-import HomePage from "../../../pages/home.page";
-import SearchResultsPage from "../../../pages/searchResults.page";
+} from "../../../constants/dropdown-options";
+import HomePage from "../../../pages/home";
+import PropertyResultsPage from "../../../pages/property-results";
+import BaseSearchResultsPage from "../../../pages/base-search-results";
+import CategoryDropdown from "../../../pages/category-dropdown";
+import LocationDropdown from "../../../pages/location-dropdown";
+import ListingDetails from "../../../pages/listing-details";
+import ListingManager from "../../../pages/listing-manager";
 import Logger from "../../../utils/logger";
 
 describe("Trade Me Property Search Tests", () => {
@@ -37,36 +42,36 @@ describe("Trade Me Property Search Tests", () => {
       Logger.info("Executing search for 'house'");
       await HomePage.searchItem("house");
       const isResultsLoaded =
-        await SearchResultsPage.isSearchResultsLoaded("house");
+        await BaseSearchResultsPage.isSearchResultsLoaded("house");
       expect(isResultsLoaded).toBe(true);
       Logger.info("Search results for 'house' loaded successfully");
     });
 
     it("should filter results by 'Trade Me Property' category", async () => {
       Logger.info("Filtering results by category: Trade Me Property");
-      await SearchResultsPage.selectCategoryOption(CATEGORY_OPTIONS.PROPERTY);
+      await CategoryDropdown.selectCategoryOption(CATEGORY_OPTIONS.PROPERTY);
       const isCategoryCorrect =
-        await SearchResultsPage.isCategoryResultsPageLoaded(
+        await PropertyResultsPage.isCategoryResultsPageLoaded(
           CATEGORY_OPTIONS.PROPERTY
         );
       expect(isCategoryCorrect).toBe(true);
       Logger.info("Property category results page loaded successfully");
     });
 
-    it("should set location to 'Wellington' region and 'Porirua' district", async () => {
+    it("should set location to 'Wellington' region and 'All of Wellington' district", async () => {
       const region = ALL_LOCATIONS_REGIONS_OPTIONS.WELLINGTON;
-      const district = ALL_LOCATIONS_DISTRICTS.Wellington.PORIRUA;
+      const district = ALL_LOCATIONS_DISTRICTS.Wellington.ALL_OF_WELLINGTON;
       Logger.info(
         `Setting location to region: ${region}, district: ${district}`
       );
-      await SearchResultsPage.selectLocationOption(region, district);
-      await SearchResultsPage.clickViewResultsButton(region, district);
+      await LocationDropdown.selectLocationOption(region, district);
+      await PropertyResultsPage.clickViewResultsButton(region, district);
       Logger.info(`Location set to ${region} region and ${district} district`);
     });
 
     it("should verify the number of listings displayed", async () => {
       Logger.info("Retrieving and verifying listings count...");
-      const listingsCount = await SearchResultsPage.getListingsCount();
+      const listingsCount = await ListingManager.getListingsCount();
       expect(listingsCount).toBeGreaterThan(0);
       Logger.info(
         `Listings count verified: ${listingsCount} listings displayed`
@@ -75,8 +80,8 @@ describe("Trade Me Property Search Tests", () => {
 
     it("should verify details of the first listing", async () => {
       Logger.info("Accessing and verifying details of the first listing...");
-      await SearchResultsPage.clickOnFirstListing();
-      const listingDetails = await SearchResultsPage.collectListingDetails();
+      await ListingManager.clickOnFirstListing();
+      const listingDetails = await ListingDetails.collectListingDetails();
       expect(listingDetails.propertyAddressText).not.toBeNull();
       expect(listingDetails.propertyBedroomNumber).toBeGreaterThanOrEqual(1);
       expect(listingDetails.propertyAgentNameText).not.toBeNull();

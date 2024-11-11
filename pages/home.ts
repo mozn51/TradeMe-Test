@@ -1,10 +1,10 @@
 import { urls } from "../constants/urls";
-import BasePage from "../pages/base.page";
-import { verifyElementClickableAndClick } from "../utils/elementActions";
+import BasePage from "./base";
+import { verifyElementClickableAndClick } from "../utils/element-actions";
 import Logger from "../utils/logger";
 import { ChainablePromiseElement } from "webdriverio";
 
-class HomePage extends BasePage {
+export class HomePage extends BasePage {
   // Define the selector for a key element unique to the homepage.
   get searchInput(): ChainablePromiseElement {
     return $("tm-homepage-in-with-the-new-campaign-header input");
@@ -76,5 +76,4 @@ class HomePage extends BasePage {
     Logger.info("Search button clicked successfully.");
   }
 }
-
 export default new HomePage();
