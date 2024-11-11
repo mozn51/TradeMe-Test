@@ -1,6 +1,6 @@
-import Logger from "../utils/logger";
-import { ChainablePromiseElement } from "webdriverio";
-import { verifyElementClickableAndClick } from "../utils/element-actions";
+import { ChainablePromiseElement } from 'webdriverio';
+import Logger from '../utils/logger';
+import UIActions from '../utils/ui-actions';
 
 export class CategoryDropdown {
   get categoryDropdownButton(): ChainablePromiseElement {
@@ -21,25 +21,25 @@ export class CategoryDropdown {
         `Attempting to select category "${listedOptions}" from the dropdown.`
       );
 
-      await verifyElementClickableAndClick(
+      await UIActions.clickIfClickable(
         this.categoryDropdownButton,
-        "Category Dropdown Button"
+        'Category Dropdown Button'
       );
 
       await browser.waitUntil(
         async () =>
-          (await this.categoryDropdownButton.getAttribute("aria-expanded")) ===
-          "true",
-        { timeout: 5000, timeoutMsg: "Category dropdown did not open" }
+          (await this.categoryDropdownButton.getAttribute('aria-expanded')) ===
+          'true',
+        { timeout: 5000, timeoutMsg: 'Category dropdown did not open' }
       );
-      Logger.info("Category dropdown successfully expanded.");
+      Logger.info('Category dropdown successfully expanded.');
 
       const optionSelector = `//span[contains(text(), "${listedOptions}")]`;
       const optionElement = $(optionSelector);
 
       if (await optionElement.isDisplayed()) {
         Logger.info(`Option "${listedOptions}" is displayed in the dropdown.`);
-        await verifyElementClickableAndClick(
+        await UIActions.clickIfClickable(
           optionElement,
           `${listedOptions} Option`
         );

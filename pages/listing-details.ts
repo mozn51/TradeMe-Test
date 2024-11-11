@@ -1,4 +1,4 @@
-import Logger from "../utils/logger";
+import Logger from '../utils/logger';
 
 export class CollectListingDetails {
   /**
@@ -40,8 +40,8 @@ export class CollectListingDetails {
           propertyAgentNameText,
         };
       } else {
-        Logger.error("Details page did not load. Skipping data collection.");
-        throw new Error("Failed to load the details page.");
+        Logger.error('Details page did not load. Skipping data collection.');
+        throw new Error('Failed to load the details page.');
       }
     } catch (error: any) {
       Logger.error(`Error collecting listing details: ${error.message}`);
@@ -60,9 +60,9 @@ export class CollectListingDetails {
       );
       await browser.waitUntil(async () => await pageHeader.isDisplayed(), {
         timeout: 5000,
-        timeoutMsg: "Details page did not load in time.",
+        timeoutMsg: 'Details page did not load in time.',
       });
-      Logger.info("Details page is loaded successfully.");
+      Logger.info('Details page is loaded successfully.');
       return true;
     } catch (error: any) {
       Logger.error(`Error loading the details page: ${error.message}`);

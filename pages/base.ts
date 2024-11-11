@@ -1,5 +1,5 @@
-import Logger from "../utils/logger";
-import { ChainablePromiseElement } from "webdriverio";
+import { ChainablePromiseElement } from 'webdriverio';
+import Logger from '../utils/logger';
 
 export default class BasePage {
   /**
@@ -17,7 +17,7 @@ export default class BasePage {
       // Wait until the document is fully loaded
       await browser.waitUntil(
         async () =>
-          await browser.execute(() => document.readyState === "complete"),
+          await browser.execute(() => document.readyState === 'complete'),
         {
           timeout: 20000, // Adjust based on typical page load times
           timeoutMsg: `Page did not fully load within the allotted time for URL: ${url}`,

@@ -1,5 +1,5 @@
-import { CATEGORY_DISPLAY_NAME_MAP } from "../constants/dropdown-options";
-import Logger from "../utils/logger";
+import { CATEGORY_DISPLAY_NAME_MAP } from '../constants/dropdown-options';
+import Logger from '../utils/logger';
 
 export class PropertyResultsPage {
   /**
@@ -13,7 +13,7 @@ export class PropertyResultsPage {
     try {
       const expectedLabels = CATEGORY_DISPLAY_NAME_MAP[category] || [category];
       Logger.info(
-        `Expected labels for category "${category}": ${expectedLabels.join(", ")}`
+        `Expected labels for category "${category}": ${expectedLabels.join(', ')}`
       );
 
       for (const label of expectedLabels) {
@@ -45,7 +45,7 @@ export class PropertyResultsPage {
       }
 
       Logger.error(
-        `None of the expected labels (${expectedLabels.join(", ")}) were found on the results page.`
+        `None of the expected labels (${expectedLabels.join(', ')}) were found on the results page.`
       );
       return false;
     } catch (error: any) {
@@ -74,12 +74,12 @@ export class PropertyResultsPage {
         (await viewResultsButton.isDisplayed()) &&
         (await viewResultsButton.isEnabled())
       ) {
-        Logger.info("View Results button is clickable. Proceeding with click.");
+        Logger.info('View Results button is clickable. Proceeding with click.');
         await viewResultsButton.click();
-        Logger.info("Clicked on the View Results button successfully.");
+        Logger.info('Clicked on the View Results button successfully.');
       } else {
-        Logger.error("View Results button is not displayed or enabled.");
-        throw new Error("Unable to click on View Results button.");
+        Logger.error('View Results button is not displayed or enabled.');
+        throw new Error('Unable to click on View Results button.');
       }
 
       let expectedHeaderText =
@@ -90,7 +90,7 @@ export class PropertyResultsPage {
         `Waiting for the results page header to match: "${expectedHeaderText}"`
       );
 
-      const resultsHeader = $("tm-search-header-heading h1");
+      const resultsHeader = $('tm-search-header-heading h1');
       await browser.waitUntil(
         async () => (await resultsHeader.getText()) === expectedHeaderText,
         {

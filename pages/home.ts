@@ -1,13 +1,13 @@
-import { urls } from "../constants/urls";
-import BasePage from "./base";
-import { verifyElementClickableAndClick } from "../utils/element-actions";
-import Logger from "../utils/logger";
-import { ChainablePromiseElement } from "webdriverio";
+import { ChainablePromiseElement } from 'webdriverio';
+import { urls } from '../constants/urls';
+import Logger from '../utils/logger';
+import UIActions from '../utils/ui-actions';
+import BasePage from './base';
 
 export class HomePage extends BasePage {
   // Define the selector for a key element unique to the homepage.
   get searchInput(): ChainablePromiseElement {
-    return $("tm-homepage-in-with-the-new-campaign-header input");
+    return $('tm-homepage-in-with-the-new-campaign-header input');
   }
 
   get searchButton(): ChainablePromiseElement {
@@ -15,7 +15,7 @@ export class HomePage extends BasePage {
   }
 
   get homepageHeader(): ChainablePromiseElement {
-    return $("tm-dynamic-homepage tm-homepage-in-with-the-new-campaign-header");
+    return $('tm-dynamic-homepage tm-homepage-in-with-the-new-campaign-header');
   }
 
   /**
@@ -26,12 +26,12 @@ export class HomePage extends BasePage {
    * @throws Will throw an error if the homepage fails to load.
    */
   public async openHomePage(): Promise<void> {
-    Logger.info("Opening the Trade Me homepage.");
+    Logger.info('Opening the Trade Me homepage.');
     await this.openUrl(urls.BASE_URL);
-    const isLoaded = await this.isPageLoaded(this.homepageHeader, "Home");
+    const isLoaded = await this.isPageLoaded(this.homepageHeader, 'Home');
     if (!isLoaded) {
-      Logger.error("Failed to load the Trade Me homepage.");
-      throw new Error("Homepage failed to load.");
+      Logger.error('Failed to load the Trade Me homepage.');
+      throw new Error('Homepage failed to load.');
     }
   }
 
@@ -45,17 +45,9 @@ export class HomePage extends BasePage {
   public async searchItem(item: string): Promise<void> {
     try {
       Logger.info(`Initiating search for item: ${item}`);
-      await browser.waitUntil(
-        async () =>
-          (await this.searchInput.isDisplayed()) &&
-          (await this.searchInput.isEnabled()),
-        {
-          timeout: 10000,
-          interval: 500,
-          timeoutMsg: `Search field not ready for input within the allotted time.`,
-        }
-      );
-      await this.searchInput.setValue(item);
+
+      await UIActions.setValueIfVisible(this.searchInput, item, 'Search Input');
+
       Logger.info(`Entered search term: ${item}`);
       await this.clickSearch();
     } catch (error: any) {
@@ -71,9 +63,9 @@ export class HomePage extends BasePage {
    * Logs the click action and throws an error if the button is not clickable.
    */
   public async clickSearch(): Promise<void> {
-    Logger.info("Attempting to click the search button.");
-    await verifyElementClickableAndClick(this.searchButton, "Search Button");
-    Logger.info("Search button clicked successfully.");
+    Logger.info('Attempting to click the search button.');
+    await UIActions.clickIfClickable(this.searchButton, 'Search Button');
+    Logger.info('Search button clicked successfully.');
   }
 }
 export default new HomePage();

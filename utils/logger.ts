@@ -1,8 +1,8 @@
 enum LogLevel {
-  INFO = "INFO",
-  WARN = "WARN",
-  ERROR = "ERROR",
-  DEBUG = "DEBUG",
+  INFO = 'INFO',
+  WARN = 'WARN',
+  ERROR = 'ERROR',
+  DEBUG = 'DEBUG',
 }
 
 class Logger {
@@ -50,5 +50,4 @@ class Logger {
     console.log(logMessage);
   }
 }
-
 export default Logger;

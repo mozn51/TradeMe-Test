@@ -1,7 +1,7 @@
-import axios from "axios";
-import { urls } from "../constants/urls";
-import { CarCategoriesResponse } from "./types";
-import Logger from "./logger";
+import axios from 'axios';
+import { urls } from '../constants/urls';
+import Logger from './logger';
+import { CarCategoriesResponse } from './types';
 
 export class ApiHelper {
   /**
@@ -11,13 +11,13 @@ export class ApiHelper {
    * @throws Will throw an error if the request fails.
    */
   public async get(endpoint: string) {
-    Logger.info("Initiating GET request", { endpoint });
+    Logger.info('Initiating GET request', { endpoint });
     try {
       const response = await axios.get(endpoint);
-      Logger.info("GET request successful", { endpoint });
+      Logger.info('GET request successful', { endpoint });
       return response.data;
     } catch (error) {
-      Logger.error("GET request failed", {
+      Logger.error('GET request failed', {
         endpoint,
         error: error.message,
       });
@@ -32,15 +32,15 @@ export class ApiHelper {
    */
   public async getUsedCarCategories(): Promise<CarCategoriesResponse> {
     const endpoint = `${urls.API.CATEGORIES}/UsedCars.json`;
-    Logger.info("Starting API request for used car categories", { endpoint });
+    Logger.info('Starting API request for used car categories', { endpoint });
     try {
       const response = await axios.get<CarCategoriesResponse>(endpoint);
-      Logger.info("API request for used car categories successful", {
+      Logger.info('API request for used car categories successful', {
         endpoint,
       });
       return response.data;
     } catch (error) {
-      Logger.error("API request for used car categories failed", {
+      Logger.error('API request for used car categories failed', {
         endpoint,
         error: error.message,
       });

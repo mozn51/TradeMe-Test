@@ -1,5 +1,5 @@
-import { verifyElementClickableAndClick } from "../utils/element-actions";
-import Logger from "../utils/logger";
+import Logger from '../utils/logger';
+import UIActions from '../utils/ui-actions';
 
 export class LocationDropdown {
   get allLocationsDropdownButton(): ChainablePromiseElement {
@@ -34,23 +34,23 @@ export class LocationDropdown {
         `Attempting to select location "${locationRegion}" from the dropdown.`
       );
 
-      await verifyElementClickableAndClick(
+      await UIActions.clickIfClickable(
         this.allLocationsDropdownButton,
-        "All Location Dropdown Button"
+        'All Location Dropdown Button'
       );
 
       await browser.waitUntil(
         async () =>
           (await this.allLocationsDropdownButton.getAttribute(
-            "aria-expanded"
-          )) === "true",
-        { timeout: 5000, timeoutMsg: "Location dropdown did not open" }
+            'aria-expanded'
+          )) === 'true',
+        { timeout: 5000, timeoutMsg: 'Location dropdown did not open' }
       );
-      Logger.info("Location dropdown successfully expanded.");
+      Logger.info('Location dropdown successfully expanded.');
 
-      await verifyElementClickableAndClick(
+      await UIActions.clickIfClickable(
         this.locationRegionDropdownButton,
-        "Location Region Dropdown Button"
+        'Location Region Dropdown Button'
       );
 
       await this.locationRegionDropdownButton.selectByVisibleText(
@@ -69,9 +69,9 @@ export class LocationDropdown {
             timeoutMsg: `District dropdown not enabled for region "${locationRegion}".`,
           }
         );
-        await verifyElementClickableAndClick(
+        await UIActions.clickIfClickable(
           this.locationDistrictDropdownButton,
-          "District Dropdown Button"
+          'District Dropdown Button'
         );
         await this.locationDistrictDropdownButton.selectByVisibleText(
           locationDistrict

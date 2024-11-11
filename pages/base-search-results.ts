@@ -1,10 +1,10 @@
-import BasePage from "./base";
-import Logger from "../utils/logger";
-import { ChainablePromiseElement } from "webdriverio";
+import { ChainablePromiseElement } from 'webdriverio';
+import Logger from '../utils/logger';
+import BasePage from './base';
 
 export class BaseSearchResultsPage extends BasePage {
   get searchResultCount(): ChainablePromiseElement {
-    return $("h3.tm-search-header-result-count__heading");
+    return $('h3.tm-search-header-result-count__heading');
   }
   /**
    * Verifies if the search results page for a specified item has loaded.
@@ -15,7 +15,7 @@ export class BaseSearchResultsPage extends BasePage {
    */
   public async isSearchResultsLoaded(item: string): Promise<boolean> {
     try {
-      Logger.info("Waiting for search results to load...");
+      Logger.info('Waiting for search results to load...');
       await browser.waitUntil(
         async () => await this.searchResultCount.isDisplayed(),
         {
