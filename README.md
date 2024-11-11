@@ -73,12 +73,6 @@ All configuration settings for WebdriverIO are in `wdio.conf.ts`. Key configurat
 ### Run All Tests
 
 ```bash
-npm run wdio
-```
-
-or
-
-```bash
 npm run test
 ```
 

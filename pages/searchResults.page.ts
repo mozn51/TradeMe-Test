@@ -286,7 +286,7 @@ class SearchResultsPage extends BasePage {
       }
 
       Logger.info(
-        `Waiting for the results page with h1: "${expectedHeaderText}"`
+        `Waiting for the results page with header: "${expectedHeaderText}"`
       );
 
       const resultsHeader = $("tm-search-header-heading h1");

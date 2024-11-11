@@ -29,7 +29,8 @@ export const config: WebdriverIO.Config = {
 
   suites: {
     ui: ["./test/specs/ui/**/*.ts"],
-    api: ["./test/specs/api/**/*.ts"],
+    api: ["./test/specs/api/apiTests.spec.ts"],
+    apiErrors: ["./test/specs/api/apitests.errors.spec.ts"],
   },
 
   specs: ["./test/specs/**/*.ts"],
